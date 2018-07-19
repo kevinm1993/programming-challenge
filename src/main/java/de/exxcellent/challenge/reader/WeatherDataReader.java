@@ -1,6 +1,8 @@
 package de.exxcellent.challenge.reader;
 
 import de.exxcellent.challenge.model.WeatherData;
+import de.exxcellent.challenge.util.logging.Logger;
+import de.exxcellent.challenge.util.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +17,7 @@ import java.util.Collection;
  */
 public class WeatherDataReader implements DataReader<WeatherData> {
 
-
+    private static final Logger LOG = LoggerFactory.getLogger(WeatherDataReader.class);
     private final String resourcePath;
 
     /**
@@ -40,7 +42,9 @@ public class WeatherDataReader implements DataReader<WeatherData> {
                 // TODO implement parsing
             }
         } catch (IOException ioe) {
-            throw new DataReaderException("IOException while reading file: " + ioe);
+            final String msg = "IOException while reading file: " + ioe;
+            LOG.error(msg);
+            throw new DataReaderException(msg);
         }
         return result;
     }
