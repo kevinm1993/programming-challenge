@@ -1,0 +1,22 @@
+= Details about Solution of Programming Challenge
+:toc:
+
+
+== Logging
+
+Even if this is just a small sample application, the usage of
+`System.out.println` is not advised, because this introduces
+a static binding in the code, which can hardly be replaced in
+the future.
+
+Because a clean software design is one of the requirements, a tiny
+logging framework was designed, which has a interface close to slf4j
+or log4j. So it will be possible to migrate to a real logging
+framework in the future. Of course, the formatting of the log lines
+has to be adjusted if a real logging framework is used.
+
+
+== Code Coverage
+
+JaCoCo was added to the build chain (Maven phase `test`) in order
+to get code coverage support for the unit tests.
