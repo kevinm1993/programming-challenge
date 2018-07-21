@@ -1,9 +1,12 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.model.FootballData;
 import de.exxcellent.challenge.model.WeatherData;
 import de.exxcellent.challenge.processor.DataProcessor;
+import de.exxcellent.challenge.processor.FootballDifferenceProcessor;
 import de.exxcellent.challenge.processor.WeatherSpreadProcessor;
 import de.exxcellent.challenge.reader.DataReader;
+import de.exxcellent.challenge.reader.FootballDataReader;
 import de.exxcellent.challenge.reader.WeatherDataReader;
 import de.exxcellent.challenge.util.logging.Logger;
 import de.exxcellent.challenge.util.logging.LoggerFactory;
@@ -30,6 +33,17 @@ public final class App {
             LOG.info(String.format("Day with smallest temperature spread: %s", smallestSpread.get().getDay()));
         } else {
             LOG.warn("Could not find any result for weather");
+        }
+
+        DataReader<FootballData> footballReader = new FootballDataReader("de/exxcellent/challenge/football.csv");
+        Collection<FootballData> footballDataList = footballReader.readData();
+
+        DataProcessor<FootballData> footballDifferenceProcessor = new FootballDifferenceProcessor();
+        Optional<FootballData> smallestDifference = footballDifferenceProcessor.process(footballDataList);
+        if (smallestDifference.isPresent()) {
+            LOG.info(String.format("Team with smallest goal spread: %s", smallestDifference.get().getTeamName()));
+        } else {
+            LOG.warn("Could not find any result for football");
         }
     }
 }
