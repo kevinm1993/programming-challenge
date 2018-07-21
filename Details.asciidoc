@@ -22,6 +22,15 @@ JaCoCo was added to the build chain (Maven phase `test`) in order
 to get code coverage support for the unit tests.
 
 
+== Reader and Parser
+
+The two functionalities _Reading_ and _Parsing_ have just been splitted into
+a base class and conrete classes for the parsing. The reason for this
+decision is, that the challenge mentions other possible sources and encoding of
+the data, like JSON files, which would then be parsed by a specific framework.
+So the common denominator is a collection of entities.
+
+
 == Package Structure
 
 As the two _domains_ "weather" and "football" are very small, the package
